@@ -5,6 +5,13 @@
     margin: 1em 2em;
     padding: 10px;
 }
+.tweets .avatar {
+    float: left;
+    height: 50px;
+    width:50px;
+    margin: 8px;
+    border-radius:5px;
+}
 
 .tweets .name{
     font-weight: bold;
