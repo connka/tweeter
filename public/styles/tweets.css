@@ -1,12 +1,21 @@
 .tweets {
-    background-color: #eee;
+    margin: 1em 2em;
+}
+
+.tweet {
+    background-color: white;
     border: solid 1px;
     border-radius: 5px;
-    margin: 1em 2em;
-    padding: 10px;
+    margin: 1em 0em;
 }
+
+.tweet-header {
+    border-radius: 5px;
+    background-color: #eeeeee;
+    display: flex;
+}
+
 .tweets .avatar {
-    float: left;
     height: 50px;
     width:50px;
     margin: 8px;
@@ -16,8 +25,7 @@
 .tweets .name{
     font-weight: bold;
     font-size: 25px;
-    height: 20px;
-    float: left;
+    flex: 1;
     padding: 5px 5px;
 }
 
@@ -26,17 +34,39 @@
     float: right;
 }
 
-.tweets div.content {
+.tweets .content {
     padding: 30px 5px;
     height: 80px;
     clear: both;
-    background-color: white;
 }
 
-.tweets .footer{
+.footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: solid 1px;
+}
+
+.tweets .datestamp{
+    padding: 5px 5px;
     font-size: 15px;
     height: 30px;
-    border-top: solid 1px;
-    border-color: #eee;
-    bottom: 0;
+    bottom: 0;   
+}
+
+.connect{
+    float: right;
+    opacity: 0;
+}
+
+.connect img{
+    height: 35px;
+    width: 35px;
+}
+
+.tweet:hover{
+opacity: 0.8
+}
+
+.tweet:hover .connect{
+    opacity: 1;
 }
