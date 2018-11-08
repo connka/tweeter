@@ -1,0 +1,35 @@
+.tweets {
+    background-color: #eee;
+    border: solid 1px;
+    border-radius: 5px;
+    margin: 1em 2em;
+    padding: 10px;
+}
+
+.tweets .name{
+    font-weight: bold;
+    font-size: 25px;
+    height: 20px;
+    float: left;
+    padding: 5px 5px;
+}
+
+.tweets .handle {
+    padding: 5px 5px;
+    float: right;
+}
+
+.tweets div.content {
+    padding: 30px 5px;
+    height: 80px;
+    clear: both;
+    background-color: white;
+}
+
+.tweets .footer{
+    font-size: 15px;
+    height: 30px;
+    border-top: solid 1px;
+    border-color: #eee;
+    bottom: 0;
+}
