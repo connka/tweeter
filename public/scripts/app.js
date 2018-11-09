@@ -7,25 +7,6 @@
  // Calls on Page Load
 $("document").ready(() => {
 
-// Temporary Data
-    const data = [
-        {
-        "user": {
-            "name": "Newton",
-            "avatars": {
-                "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-                "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-                "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-            },
-            "handle": "@SirIsaac"
-        },
-        "content": {
-            "text": "If I have seen further it is by standing on the shoulders of giants"
-        },
-        "created_at": 1461116232227
-    },
-];
-
 function renderTweets(tweets){
     tweets.forEach((tweetData) => {
         $('#tweets-container').append(createTweetElement(tweetData));
@@ -51,9 +32,9 @@ $("form").on("submit", function(event) {
 
     if (!($("textarea").val())) {
         alert("Please enter a tweet!")
-      } else if ((Number($(".counter").text())) < 0) {
+    } else if ((Number($(".counter").text())) < 0) {
         alert("Your text is too long! Please keep your post under 140 characters.")
-      } else {
+    } else {
 
         $.ajax({
             url: "/tweets",
@@ -68,8 +49,12 @@ $("form").on("submit", function(event) {
     }
 });
 
+    // -> Compose Button to Toggle Tweet Input:
+    $("button").on('click', () => {
+        $(".new-tweet").slideToggle();
+        $("textarea").focus();
+    })
 
-    
     function createTweetElement(tweetData) {
         let tweetsContainer = `<article class="tweet">
         <header class="tweet-header">
