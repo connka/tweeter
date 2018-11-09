@@ -3,8 +3,11 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+
+ // Calls on Page Load
 $("document").ready(() => {
 
+// Temporary Data
     const data = [
         {
         "user": {
@@ -21,43 +24,51 @@ $("document").ready(() => {
         },
         "created_at": 1461116232227
     },
-    {
-        "user": {
-            "name": "Descartes",
-            "avatars": {
-                "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-                "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-                "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-            },
-            "handle": "@rd" 
-        },
-        "content": {
-            "text": "Je pense , donc je suis"
-        },
-        "created_at": 1461113959088
-    },
-    {
-        "user": {
-            "name": "Johann von Goethe",
-            "avatars": {
-            "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-            "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-            "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-        },
-            "handle": "@johann49"
-        },
-        "content": {
-            "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-        },
-        "created_at": 1461113796368
-    }
 ];
 
-    function renderTweets(tweets){
-        tweets.forEach((tweetData) => {
-            $('#tweets-container').append(createTweetElement(tweetData));
+function renderTweets(tweets){
+    tweets.forEach((tweetData) => {
+        $('#tweets-container').append(createTweetElement(tweetData));
+    })
+}
+
+//Load Tweets
+    function loadTweets(callback) {
+    $.ajax({ 
+        url: "/tweets",
+        method: 'GET', 
+        success: (tweets) => {
+            callback(tweets);
+            }
         })
     }
+    loadTweets(renderTweets);
+//    console.log(tweet);
+
+//New Tweet Handler
+$("form").on("submit", function(event) {
+    event.preventDefault();
+
+    if (!($("textarea").val())) {
+        alert("Please enter a tweet!")
+      } else if ((Number($(".counter").text())) < 0) {
+        alert("Your text is too long! Please keep your post under 140 characters.")
+      } else {
+
+        $.ajax({
+            url: "/tweets",
+            method: "POST",
+            data: $(this).serialize(),
+            success: (tweetContainer) => {
+                $("textarea").val("");
+                $('#tweets-container').prepend(createTweetElement(tweet));
+                console.log("Successfully printed tweet.");
+            }
+        });
+    }
+});
+
+
     
     function createTweetElement(tweetData) {
         let tweetsContainer = `<article class="tweet">
@@ -79,7 +90,6 @@ $("document").ready(() => {
         console.log("Tweets Container:",tweetsContainer);
         return tweetsContainer;
     }
-
     renderTweets(data);
     
 });
