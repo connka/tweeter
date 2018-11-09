@@ -1,4 +1,4 @@
-.tweets {
+#tweets-container {
     margin: 1em 2em;
 }
 
@@ -15,26 +15,26 @@
     display: flex;
 }
 
-.tweets .avatar {
+.avatar {
     height: 50px;
     width:50px;
     margin: 8px;
     border-radius:5px;
 }
 
-.tweets .name{
+.name{
     font-weight: bold;
     font-size: 25px;
     flex: 1;
     padding: 5px 5px;
 }
 
-.tweets .handle {
+.handle {
     padding: 5px 5px;
     float: right;
 }
 
-.tweets .content {
+.content {
     padding: 30px 5px;
     height: 80px;
     clear: both;
@@ -46,7 +46,7 @@
     border-top: solid 1px;
 }
 
-.tweets .datestamp{
+.datestamp{
     padding: 5px 5px;
     font-size: 15px;
     height: 30px;
