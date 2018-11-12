@@ -1,13 +1,36 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
 
- // Calls on Page Load
+    function createTweetElement(tweetData) {
+        let $tweet = `<article class="tweet">
+        <header class="tweet-header">
+        <img class="avatar" src="${tweetData.user.avatars.small}">
+        <header class="name" name="name">${tweetData.user.name}</header>
+        <header class="handle" name="handle">${tweetData.user.handle}s</header>
+        </header>
+        <div class="content" name="content">${tweetData.content.text}</div>
+        <footer class="footer">
+        <time class="datestamp">${moment(tweetData.created_at).fromNow() + ` days ago`}</time>
+        <span class="connect">
+            <img class="retweet" src="/images/retweet.png">
+            <img class="like" src="/images/like.png">
+            <img class="flag" src="/images/flag.png">
+        </span>
+        </footer>
+        </article>`
+        console.log("Tweets Container:",$tweet);
+        return $tweet;
+    }
+    function renderTweets(tweets) {
+        tweets.forEach((tweet) => {
+            $('#tweets-container').append(createTweetElement(tweet));
+        })
+    }
+
+
+// Calls on Page Load
 $("document").ready(() => {
 
 function renderTweets(tweets){
+//    console.log(tweets);
     tweets.forEach((tweetData) => {
         $('#tweets-container').append(createTweetElement(tweetData));
     })
@@ -24,7 +47,6 @@ function renderTweets(tweets){
         })
     }
     loadTweets(renderTweets);
-//    console.log(tweet);
 
 //New Tweet Handler
 $("form").on("submit", function(event) {
@@ -40,7 +62,8 @@ $("form").on("submit", function(event) {
             url: "/tweets",
             method: "POST",
             data: $(this).serialize(),
-            success: (tweetContainer) => {
+            success: (tweet) => {
+                console.log("This is a tweet: ",tweet);
                 $("textarea").val("");
                 $('#tweets-container').prepend(createTweetElement(tweet));
                 console.log("Successfully printed tweet.");
@@ -55,26 +78,4 @@ $("form").on("submit", function(event) {
         $("textarea").focus();
     })
 
-    function createTweetElement(tweetData) {
-        let tweetsContainer = `<article class="tweet">
-        <header class="tweet-header">
-        <img class="avatar" src="${tweetData.user.avatars.small}">
-        <header class="name" name="name">${tweetData.user.name}</header>
-        <header class="handle" name="handle">${tweetData.user.handle}s</header>
-        </header>
-        <div class="content" name="content">${tweetData.content.text}</div>
-        <footer class="footer">
-        <time class="datestamp">${tweetData.created_at}</time>
-        <span class="connect">
-            <img class="retweet" src="/images/retweet.png">
-            <img class="like" src="/images/like.png">
-            <img class="flag" src="/images/flag.png">
-        </span>
-        </footer>
-        </article>`
-        console.log("Tweets Container:",tweetsContainer);
-        return tweetsContainer;
-    }
-    renderTweets(data);
-    
 });

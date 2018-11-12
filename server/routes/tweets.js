@@ -4,6 +4,7 @@ const userHelper    = require("../lib/util/user-helper")
 
 const express       = require('express');
 const tweetsRoutes  = express.Router();
+var moment = require('moment');
 
 module.exports = function(DataHelpers) {
 
@@ -35,11 +36,11 @@ module.exports = function(DataHelpers) {
       created_at: Date.now()
     };
 
-    DataHelpers.saveTweet(tweet, (err) => {
+    DataHelpers.saveTweet(tweet, (err, tweet) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        res.status(201).send();
+        res.status(200).send(tweet);
       }
     });
   });
