@@ -5,6 +5,7 @@ const userHelper    = require("../lib/util/user-helper")
 const express       = require('express');
 const tweetsRoutes  = express.Router();
 var moment = require('moment');
+moment().format();
 
 module.exports = function(DataHelpers) {
 

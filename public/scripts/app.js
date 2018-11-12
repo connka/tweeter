@@ -8,7 +8,7 @@
         </header>
         <div class="content" name="content">${tweetData.content.text}</div>
         <footer class="footer">
-        <time class="datestamp">${moment(tweetData.created_at).fromNow() + ` days ago`}</time>
+        <time class="datestamp">${moment([tweetData.created_at]).fromNow() + ` days ago`}</time>
         <span class="connect">
             <img class="retweet" src="/images/retweet.png">
             <img class="like" src="/images/like.png">
