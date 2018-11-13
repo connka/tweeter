@@ -1,6 +1,6 @@
-    function createTweetElement(tweetData) {
-        console.log("Tweets Data:",tweetData);
-        let $tweet = `<article class="tweet">
+function createTweetElement(tweetData) {
+    console.log("Tweets Data:", tweetData);
+    let $tweet = `<article class="tweet">
         <header class="tweet-header">
         <img class="avatar" src="${tweetData.user.avatars.small}">
         <header class="name" name="name">${tweetData.user.name}</header>
@@ -8,77 +8,68 @@
         </header>
         <div class="content" name="content">${tweetData.content.text}</div>
         <footer class="footer">
-<<<<<<< HEAD
         <time class="datestamp">${moment(tweetData.created_at).fromNow()}</time>
-=======
-        <time class="datestamp">${moment([tweetData.created_at], "YYYYMMDD").fromNow()}</time>
->>>>>>> dadad65ac6462fc65b359cefeb7dd7e472c03027
         <span class="connect">
             <img class="retweet" src="/images/retweet.png">
             <img class="like" src="/images/like.png">
             <img class="flag" src="/images/flag.png">
         </span>
         </footer>
-        </article>`
+        </article>`;
         return $tweet;
     }
-    function renderTweets(tweets) {
-        tweets.forEach((tweet) => {
-            $('#tweets-container').append(createTweetElement(tweet));
-        })
-    }
-
-
-// Calls on Page Load
-$("document").ready(() => {
-
-function renderTweets(tweets){
-//    console.log(tweets);
-    tweets.forEach((tweetData) => {
-        $('#tweets-container').append(createTweetElement(tweetData));
-    })
+function renderTweets(tweets) {
+    tweets.forEach(tweet => {
+    $("#tweets-container").append(createTweetElement(tweet));
+});
 }
+
+//Calls on Page Load
+$("document").ready(() => {
+    function renderTweets(tweets) {
+        tweets.forEach(tweetData => {
+            $("#tweets-container").append(createTweetElement(tweetData));
+        });
+    }
 
 //Load Tweets
     function loadTweets(callback) {
-    $.ajax({ 
-        url: "/tweets",
-        method: 'GET', 
-        success: (tweets) => {
-            callback(tweets);
-            }
-        })
-    }
-    loadTweets(renderTweets);
-
-//New Tweet Handler
-$("form").on("submit", function(event) {
-    event.preventDefault();
-
-    if (!($("textarea").val())) {
-        alert("Please enter a tweet!")
-    } else if ((Number($(".counter").text())) < 0) {
-        alert("Your text is too long! Please keep your post under 140 characters.")
-    } else {
-
         $.ajax({
             url: "/tweets",
-            method: "POST",
-            data: $(this).serialize(),
-            success: (tweet) => {
-                console.log("This is a tweet: ",tweet);
-                $("textarea").val("");
-                $('#tweets-container').prepend(createTweetElement(tweet));
-                console.log("Successfully printed tweet.");
+            method: "GET",
+            success: tweets => {
+                callback(tweets);
             }
         });
     }
-});
+    
+    loadTweets(renderTweets);
 
-    // -> Compose Button to Toggle Tweet Input:
-    $("button").on('click', () => {
-        $(".new-tweet").slideToggle();
-        $("textarea").focus();
-    })
+//New Tweet Handler
+    $("form").on("submit", function(event) {
+        event.preventDefault();
+        if (!$("textarea").val()) {
+            alert("Please enter a tweet!");
+        } else if (Number($(".counter").text()) < 0) {
+            alert("Your text is too long! Please keep your post under 140 characters.");
+        } else {
+            $.ajax({
+                url: "/tweets",
+                method: "POST",
+                data: $(this).serialize(),
+                success: tweet => {
+                    console.log("This is a tweet: ", tweet);
+                    $("textarea").val("");
+                    $("#tweets-container").prepend(createTweetElement(tweet));
+                    console.log("Successfully printed tweet.");
+                }
+            });
+        }
+    });
 
+//Compose Button Toggle:
+    $("button").on("click", () => {
+    $(".new-tweet").slideToggle();
+    $("textarea").focus();
+    });
 });

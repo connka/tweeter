@@ -1,14 +1,16 @@
-$ ("document").ready(() => {
-
-$("#newTweet").on('keyup', function() {
-  let charAmount = this.value.length;
-  const maxChar = 140;
-  let countdown = (maxChar - charAmount);
-  $(this).parent().children("span").html(maxChar - (($(this).val()).length));
-  if (countdown < 0) {
-    document.getElementById("counter").style.color = "#ff0000";
-  } else {
-    document.getElementById("counter").style.color = "#000000";
-  }
-})
-})
+$("document").ready(() => {
+  $("#newTweet").on("keyup", function() {
+    let charAmount = this.value.length;
+    const maxChar = 140;
+    let countdown = maxChar - charAmount;
+    $(this)
+      .parent()
+      .children("span")
+      .html(maxChar - $(this).val().length);
+    if (countdown < 0) {
+      document.getElementById("counter").style.color = "#ff0000";
+    } else {
+      document.getElementById("counter").style.color = "#000000";
+    }
+  });
+});
