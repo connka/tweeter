@@ -8,7 +8,11 @@
         </header>
         <div class="content" name="content">${tweetData.content.text}</div>
         <footer class="footer">
+<<<<<<< HEAD
         <time class="datestamp">${moment(tweetData.created_at).fromNow()}</time>
+=======
+        <time class="datestamp">${moment([tweetData.created_at], "YYYYMMDD").fromNow()}</time>
+>>>>>>> dadad65ac6462fc65b359cefeb7dd7e472c03027
         <span class="connect">
             <img class="retweet" src="/images/retweet.png">
             <img class="like" src="/images/like.png">
