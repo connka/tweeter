@@ -1,5 +1,5 @@
-
     function createTweetElement(tweetData) {
+        console.log("Tweets Data:",tweetData);
         let $tweet = `<article class="tweet">
         <header class="tweet-header">
         <img class="avatar" src="${tweetData.user.avatars.small}">
@@ -8,7 +8,7 @@
         </header>
         <div class="content" name="content">${tweetData.content.text}</div>
         <footer class="footer">
-        <time class="datestamp">${moment([tweetData.created_at], "YYYYMMDD").fromNow()}</time>
+        <time class="datestamp">${moment(tweetData.created_at).fromNow()}</time>
         <span class="connect">
             <img class="retweet" src="/images/retweet.png">
             <img class="like" src="/images/like.png">
@@ -16,7 +16,6 @@
         </span>
         </footer>
         </article>`
-        console.log("Tweets Container:",$tweet);
         return $tweet;
     }
     function renderTweets(tweets) {
