@@ -1,8 +1,8 @@
 $("document").ready(() => {
   $("#newTweet").on("keyup", function() {
-    let charAmount = this.value.length;
+    const charAmount = this.value.length;
     const maxChar = 140;
-    let countdown = maxChar - charAmount;
+    const countdown = maxChar - charAmount;
     $(this)
       .parent()
       .children("span")

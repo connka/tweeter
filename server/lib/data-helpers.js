@@ -21,8 +21,6 @@ module.exports = function makeDataHelpers(db) {
       db.collection("tweeter")
         .find()
         .toArray((err, tweets) => {
-          // console.log("There are the tweets: ", tweets);
-          // console.log("This is the error: ", err);
           if (err) {
             return callback(err);
           }
